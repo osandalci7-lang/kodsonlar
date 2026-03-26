@@ -1,0 +1,42 @@
+{% extends "visitor_portal_base.html" %}
+
+{% block content %}
+
+<div style="max-width:1200px;margin:0 auto;">
+    <h1 style="margin:0 0 24px 0;color:#0b1f4d;">Ships in Yard</h1>
+
+    <div style="background:#fff;padding:24px;border-radius:14px;box-shadow:0 2px 10px rgba(0,0,0,0.06);">
+        <table style="width:100%;border-collapse:collapse;">
+            <thead>
+                <tr style="border-bottom:1px solid #e5e7eb;text-align:left;">
+                    <th style="padding:12px;">Ship Name</th>
+                    <th style="padding:12px;">Tonnage</th>
+                    <th style="padding:12px;">Flag</th>
+                    <th style="padding:12px;">Berth / Location</th>
+                    <th style="padding:12px;">Company</th>
+                    <th style="padding:12px;">Arrival</th>
+                    <th style="padding:12px;">Departure</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for ship in ships %}
+                <tr style="border-bottom:1px solid #f1f5f9;">
+                    <td style="padding:12px;">{{ ship[0] }}</td>
+                    <td style="padding:12px;">{{ ship[1] or '-' }}</td>
+                    <td style="padding:12px;">{{ ship[2] or '-' }}</td>
+                    <td style="padding:12px;">{{ ship[3] or '-' }}</td>
+                    <td style="padding:12px;">{{ ship[4] or '-' }}</td>
+                    <td style="padding:12px;">{{ ship[5] or '-' }}</td>
+                    <td style="padding:12px;">{{ ship[6] or '-' }}</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+
+        {% if not ships %}
+        <p style="margin-top:20px;">No ships are currently listed in the yard.</p>
+        {% endif %}
+    </div>
+</div>
+
+{% endblock %}

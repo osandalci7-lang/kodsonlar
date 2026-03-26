@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Norden Safety Visitor Portal</title>
+    <link rel="stylesheet" href="/static/css/style.css">
+    <style>
+        *{
+            box-sizing:border-box;
+        }
+
+        body{
+            margin:0;
+            font-family:Arial, sans-serif;
+            background:#f3f4f6;
+            color:#111827;
+        }
+
+        .visitor-topbar{
+            background:#0b1f4d;
+            color:white;
+            display:flex;
+            justify-content:space-between;
+            align-items:center;
+            padding:20px 32px;
+        }
+
+        .visitor-logo a{
+            color:white;
+            text-decoration:none;
+            font-size:28px;
+            font-weight:700;
+        }
+
+        .visitor-menu{
+            display:flex;
+            gap:24px;
+            align-items:center;
+        }
+
+        .visitor-menu a{
+            color:white;
+            text-decoration:none;
+            font-size:16px;
+            font-weight:500;
+        }
+
+        .visitor-page{
+            min-height:calc(100vh - 80px);
+            padding:40px 20px;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="visitor-topbar">
+        <div class="visitor-logo">
+            <a href="/visitor">Norden Safety</a>
+        </div>
+
+        <div class="visitor-menu">
+            <a href="/news">News</a>
+            <a href="?lang=en">EN</a>
+            <a href="?lang=nl">NL</a>
+            <a href="/logout">{{ t("logout") if t is defined else "Logout" }}</a>
+        </div>
+    </div>
+
+    <div class="visitor-page">
+        {% block content %}{% endblock %}
+    </div>
+
+</body>
+</html>

@@ -1,0 +1,96 @@
+{% extends "visitor_portal_base.html" %}
+
+{% block content %}
+
+<h1 style="margin:0 0 24px 0;color:#0b1f4d;">Personal Information</h1>
+
+<div style="display:grid;grid-template-columns:2fr 1fr;gap:24px;max-width:1200px;margin:0 auto;">
+
+    <div style="background:#fff;border-radius:14px;padding:28px;box-shadow:0 2px 10px rgba(0,0,0,0.06);">
+        <form method="post" action="/visitor/personal-information/update">
+            <div style="display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:18px;">
+
+                <div>
+                    <label style="display:block;color:#6b7280;margin-bottom:8px;">Username</label>
+                    <input type="text" name="username" value="{{ visitor[1] }}" required
+                           style="width:100%;padding:12px;border:1px solid #d1d5db;border-radius:10px;">
+                </div>
+
+                <div>
+                    <label style="display:block;color:#6b7280;margin-bottom:8px;">Name</label>
+                    <input type="text" name="name" value="{{ visitor[2] }}" required
+                           style="width:100%;padding:12px;border:1px solid #d1d5db;border-radius:10px;">
+                </div>
+
+                <div>
+                    <label style="display:block;color:#6b7280;margin-bottom:8px;">Surname</label>
+                    <input type="text" name="surname" value="{{ visitor[3] }}" required
+                           style="width:100%;padding:12px;border:1px solid #d1d5db;border-radius:10px;">
+                </div>
+
+                <div>
+                    <label style="display:block;color:#6b7280;margin-bottom:8px;">Mobile Phone</label>
+                    <input type="text" name="mobile_phone" value="{{ visitor[4] }}" required
+                           style="width:100%;padding:12px;border:1px solid #d1d5db;border-radius:10px;">
+                </div>
+
+                <div>
+                    <label style="display:block;color:#6b7280;margin-bottom:8px;">Vehicle Plate</label>
+                    <input type="text" name="vehicle_plate" value="{{ visitor[5] if visitor[5] else '' }}"
+                           style="width:100%;padding:12px;border:1px solid #d1d5db;border-radius:10px;">
+                </div>
+
+                <div>
+                    <label style="display:block;color:#6b7280;margin-bottom:8px;">Company Name</label>
+                    <input type="text" name="company_name" value="{{ visitor[6] }}" required
+                           style="width:100%;padding:12px;border:1px solid #d1d5db;border-radius:10px;">
+                </div>
+
+                <div style="grid-column:1 / -1;">
+                    <label style="display:block;color:#6b7280;margin-bottom:8px;">Purpose of Visit</label>
+                    <input type="text" name="purpose_of_visit" value="{{ visitor[7] }}" required
+                           style="width:100%;padding:12px;border:1px solid #d1d5db;border-radius:10px;">
+                </div>
+
+            </div>
+
+            <div style="margin-top:24px;">
+                <button type="submit"
+                        style="background:#0b1f4d;color:white;border:none;padding:12px 18px;border-radius:10px;font-weight:600;cursor:pointer;">
+                    Update Information
+                </button>
+            </div>
+        </form>
+    </div>
+
+    <div style="background:#fff;border-radius:14px;padding:24px;box-shadow:0 2px 10px rgba(0,0,0,0.06);">
+        <h3 style="margin-top:0;color:#0b1f4d;">Uploaded Documents</h3>
+
+        {% if visitor[10] %}
+            <p style="margin-bottom:12px;"><strong>ID Copy</strong></p>
+            <a href="/static/visitor_documents/{{ visitor[10] }}" target="_blank"
+               style="display:inline-block;background:#2563eb;color:white;padding:10px 14px;border-radius:8px;text-decoration:none;">
+                View Document
+            </a>
+        {% else %}
+            <p>No document uploaded.</p>
+        {% endif %}
+
+        <hr style="margin:24px 0;">
+
+        <p style="margin:0 0 10px 0;"><strong>Safety Status</strong></p>
+        {% if visitor[8] == 1 %}
+            <p style="color:#15803d;font-weight:600;">{{ t("completed") if t is defined else "Completed" }}</p>
+        {% else %}
+            <p style="color:#b45309;font-weight:600;">{{ t("pending") if t is defined else "Pending" }}</p>
+        {% endif %}
+
+        <hr style="margin:24px 0;">
+
+        <p style="margin:0 0 10px 0;"><strong>Created At</strong></p>
+        <p style="margin:0;color:#6b7280;">{{ visitor[9] }}</p>
+    </div>
+
+</div>
+
+{% endblock %}
